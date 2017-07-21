@@ -7,7 +7,8 @@ export default class MyTabs extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 'goods'
+            value: 'goods',
+            tapItem:null
         }
     }
 
@@ -17,14 +18,21 @@ export default class MyTabs extends React.Component {
         });
     };
 
+    // tapItem(val,index,e){
+    //     this.setState({
+    //         tapItem:val
+    //     });
+    // }
     render() {
         let renderGoodsList = this.props.data.map((val,index)=>{
             return (
-                <div>
-                    <div>{val.id}</div>
-                    <div>{val.nameEn}</div>
-                    <div>{val.name}</div>
-                </div>
+                <ListItem onTouchTap={this.props.tapItemFun.bind(this,val,index)} className="goodsItem" key={`goodsItem${index}`}>
+                    <div style={styles.goodsItem}>
+                        <div style={{backgroundColor:'#FF7788',paddingLeft:'8px',paddingRight:'8px'}}>{val.id}</div>
+                        <div style={{marginLeft:'8px',marginRight:'8px'}}>{val.nameEn}</div>
+                        <div>{val.name}</div>
+                    </div>
+                </ListItem>
             );
         })
         return (
@@ -34,21 +42,26 @@ export default class MyTabs extends React.Component {
             >
                 <Tab label="物品ID" value="goods">
                     <div>
-                        <h2>Controllable Tab B</h2>
-                        {renderGoodsList}
+                        <List>
+                            {renderGoodsList}
+                        </List>
                     </div>
                 </Tab>
                 <Tab label="系统命令" value="system">
-                <div>
-                    <h2>Controllable Tab B</h2>
-                    <p>
-                    This is another example of a controllable tab. Remember, if you
-                    use controllable Tabs, you need to give all of your tabs values or else
-                    you wont be able to select them.
-                    </p>
-                </div>
+                    <div>
+                        <div style={{backgroundColor:'#FF7788',paddingLeft:'8px',paddingRight:'8px'}}>ss</div>
+                        <div style={{marginLeft:'8px',marginRight:'8px'}}>dd</div>
+                        <div>ddd</div>
+                    </div>
                 </Tab>
             </Tabs>
         );
+    }
+}
+
+const styles = {
+    goodsItem:{
+        display: 'flex',
+        alignItems: 'center'
     }
 }
