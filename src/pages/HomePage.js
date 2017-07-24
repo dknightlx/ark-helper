@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import MyTabs from '../components/Tabs';
 import RaisedButton from 'material-ui/RaisedButton';
 import ItemInfo from '../components/ItemInfo';
+import SaveToFile from '../components/FileEdit';
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -40,6 +41,10 @@ export default class HomePage extends Component {
             itemInfo:val
         });
     }
+    saveEdit(val){
+        console.log(val);
+        // SaveToFile(val);
+    }
     render() {
         return(
             <div className="homeContainer" style={styles.homeContainer}>
@@ -54,7 +59,7 @@ export default class HomePage extends Component {
                         :<RaisedButton onTouchTap={this.initSearch.bind(this)} label="未找到对应物品，点击显示全部" />}
                 </div>
                 <div className="itemInfo" style={styles.itemInfo}>
-                    {this.state.itemInfo?<ItemInfo info={this.state.itemInfo} />:null}
+                    {this.state.itemInfo?<ItemInfo saveInfo={this.saveEdit.bind(this)} info={this.state.itemInfo} />:null}
                 </div>
             </div>
         )
